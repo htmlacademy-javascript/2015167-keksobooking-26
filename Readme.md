@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Евгений Кан](https://up.htmlacademy.ru/javascript/26/user/2015167).
-* Наставник: [Никита Канаев] (https://up.htmlacademy.ru/profession/frontender/13/javascript/26/user/1609737).
+* Наставник: [Никита Канаев](https://up.htmlacademy.ru/profession/frontender/13/javascript/26/user/1609737).
 
 ---
 
