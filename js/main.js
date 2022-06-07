@@ -9,7 +9,7 @@ const getRandomInt = (min, max) => {
   if (min > max) {
     [min,max] = [max,min];
   }
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Number(Math.floor(Math.random() * (max - min + 1)) + min);
 };
 
 getRandomInt(10, 1);
@@ -26,7 +26,7 @@ const getRandomFloatInt = (min, max, digits) => {
   if (min>max) {
     [min,max] = [max,min];
   }
-  return (Math.random() * (max - min + 1) + min).toFixed([digits]);
+  return Number((Math.random() * (max - min + 1) + min).toFixed([digits]));
 };
 
 getRandomFloatInt(32, 5303, 22);
