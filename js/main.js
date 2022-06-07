@@ -2,40 +2,31 @@
 
 // Общее задание
 
-function getRandomIntInclusive(min, max) {
+const getRandomInt = (min, max) => {
   if(min < 0 || max < 0) {
-    console.log('Значения не должны быть отрицательными');
-  } else {
-    if (min>=max) {
-      console.log('Значение min должно быть больше max');
-    } else {
-      min = Math.round(min);
-      max = Math.round(max);
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    return -1;
   }
-}
-getRandomIntInclusive(1.1, 2.2);
+  if (min > max) {
+    [min,max] = [max,min];
+  }
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+getRandomInt(10, 1);
 
 // Задание по кексобукингу
 
-function getRandomIntInclusiveKeksobooking(min, max, digits) {
+const getRandomFloatInt = (min, max, digits) => {
   if(digits > 100) {
-    console.log('Количество знаков после запятой должно быть не более 100');
-  } else {
-    if(min < 0 || max < 0) {
-      console.log('Значения не должны быть отрицательными');
-    } else {
-      if (min>=max) {
-        console.log('Значение min должно быть больше max');
-      }
-      else {
-        min.toFixed([digits]);
-        max.toFixed([digits]);
-        return Math.random() * (max - min + 1) + min;
-      }
-    }
+    return;
   }
-}
+  if(min < 0 || max < 0) {
+    return -1;
+  }
+  if (min>max) {
+    [min,max] = [max,min];
+  }
+  return (Math.random() * (max - min + 1) + min).toFixed([digits]);
+};
 
-getRandomIntInclusiveKeksobooking(32, 5303, 100);
+getRandomFloatInt(32, 5303, 22);
