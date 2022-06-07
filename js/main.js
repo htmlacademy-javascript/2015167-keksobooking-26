@@ -3,7 +3,7 @@
 // Общее задание
 
 const getRandomInt = (min, max) => {
-  if(min < 0 || max < 0) {
+  if (min < 0 || max < 0) {
     return -1;
   }
   if (min > max) {
@@ -17,16 +17,16 @@ getRandomInt(10, 1);
 // Задание по кексобукингу
 
 const getRandomFloatInt = (min, max, digits) => {
-  if(digits > 100) {
+  if (digits > 5) {
     return;
   }
-  if(min < 0 || max < 0) {
+  if (min < 0 || max < 0) {
     return -1;
   }
-  if (min>max) {
+  if (min > max) {
     [min,max] = [max,min];
   }
   return Number((Math.random() * (max - min + 1) + min).toFixed([digits]));
 };
 
-getRandomFloatInt(32, 5303, 22);
+getRandomFloatInt(32, 5303, 5);
