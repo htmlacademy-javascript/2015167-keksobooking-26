@@ -18,7 +18,7 @@ getRandomInt(10, 1);
 
 const getRandomFloatInt = (min, max, digits) => {
   if (digits > 5) {
-    return;
+    return -1;
   }
   if (min < 0 || max < 0) {
     return -1;
