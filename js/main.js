@@ -31,39 +31,43 @@ const getRandomFloatInt = (min, max, digits) => {
 
 getRandomFloatInt(0, 99, 5);
 
-const idPng = getRandomInt(1, 9);
-const getAvatarValue = function () {
+
+const getAvatarValue = () => {
+  const idPng = getRandomInt(1, 9);
   if (idPng < 10) {
     return `img/avatars/user0${idPng}.png`;
   }
   return `img/avatars/user${idPng}.png`;
 };
 
-const author = {
-  avatar: getAvatarValue(idPng),
-};
+const getAuthor = () => ({
+  avatar: getAvatarValue(),
+});
 
-const getLat = getRandomFloatInt(35.65000, 35.70000, 5);
-const getLng = getRandomFloatInt(139.70000, 139.80000, 5);
-const adressValue = `${getLat  }, ${  getLng}`;
-const priceValue = getRandomInt(1, 100000);
+const getLat = () => getRandomFloatInt(35.65000, 35.70000, 5);
+const getLng = () => getRandomFloatInt(139.70000, 139.80000, 5);
+const adressValue = () => `${getLat()}, ${getLng()}`;
+const getPriceValue = () => getRandomInt(1, 100000);
+
 const typeArray = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 
 const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length - 1)];
 
-const roomsValue = getRandomInt(1, 10);
-const guestsValue = getRandomInt(1, 10);
+const getRoomsValue = () => getRandomInt(1, 10);
+const getGuestsValue = () => getRandomInt(1, 10);
+
 const checkinArray = ['12:00', '13:00', '14:00'];
 const checkoutArray = ['12:00', '13:00', '14:00'];
 
 // Определяем длину массива, создаём новый массив, перезаписываем новый массив удаляя повторения
 
 const featuresArray = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-const newArrayLength = getRandomInt(0, featuresArray.length - 1);
-const newArray = [];
-const uniqueArray = [];
-const createArray = function () {
-  for (let i = 0; i <= newArrayLength; i++) {
+const newArrayLength = () => getRandomInt(0, featuresArray.length - 1);
+
+const createArray = () => {
+  const newArray = [];
+  const uniqueArray = [];
+  for (let i = 0; i <= newArrayLength(); i++) {
     const options = getRandomArrayElement(featuresArray);
     newArray.push(options);
   }
@@ -80,15 +84,14 @@ const createArray = function () {
 
 const photosArray = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
-];
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 
-const newPhotoArrayLength = getRandomInt(0, photosArray.length - 1);
-const newPhotoArray = [];
-const uniquePhotoArray = [];
+const newPhotoArrayLength = () => getRandomInt(0, photosArray.length - 1);
+
 const createPhotoArray = () => {
-  for (let i = 0; i <= newPhotoArrayLength; i++) {
+  const newPhotoArray = [];
+  const uniquePhotoArray = [];
+  for (let i = 0; i <= newPhotoArrayLength(); i++) {
     const options = getRandomArrayElement(photosArray);
     newPhotoArray.push(options);
   }
@@ -101,36 +104,35 @@ const createPhotoArray = () => {
   return uniquePhotoArray;
 };
 
-const offer = {
+const getOffer = () => ({
   title: 'Лучшее предложение по Вашим критериям',
-  adress: adressValue,
-  price: priceValue,
+  adress: adressValue(),
+  price: getPriceValue(),
   type: getRandomArrayElement(typeArray),
-  rooms: roomsValue,
-  guests: guestsValue,
+  rooms: getRoomsValue(),
+  guests: getGuestsValue(),
   checkin: getRandomArrayElement(checkinArray),
   checkout: getRandomArrayElement(checkoutArray),
   features: createArray(featuresArray),
   description: 'Шведский стол на завтрак включен в стоимость проживания',
   photos: createPhotoArray(photosArray),
-};
+});
 
 //Изменил location на название myLocation потому что в консоле выдавало ошибку, что слово уже используется. Я так понимаю глобальное название
 
-const myLocation = {
-  lat: getLat,
-  lng: getLng,
-};
+const getLocation = () => ({
+  lat: getLat(),
+  lng: getLng(),
+});
 
 const createObject = () => ({
-  author,
-  offer,
-  myLocation,
+  author: getAuthor(),
+  offer: getOffer(),
+  myLocation: getLocation(),
 });
 
 const requiredQuantity = 10;
 
 const createRequiredQuantityObjects = Array.from({length:requiredQuantity}, createObject);
 
-createObject();
 createRequiredQuantityObjects();
