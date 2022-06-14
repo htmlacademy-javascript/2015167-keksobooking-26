@@ -128,7 +128,7 @@ const getLocation = () => ({
 const createObject = () => ({
   author: getAuthor(),
   offer: getOffer(),
-  myLocation: getLocation(),
+  location: getLocation(),
 });
 
 const requiredQuantityObjects = 10;
