@@ -26,7 +26,7 @@ const getRandomFloatInt = (min, max, digits) => {
   if (min > max) {
     [min,max] = [max,min];
   }
-  return Number((Math.random() * (max - min + 1) + min).toFixed([digits]));
+  return Number((Math.random() * (max - min) + min).toFixed([digits]));
 };
 
 getRandomFloatInt(0, 99, 5);
@@ -131,8 +131,9 @@ const createObject = () => ({
   myLocation: getLocation(),
 });
 
-const requiredQuantity = 10;
+const requiredQuantityObjects = 10;
 
-const createRequiredQuantityObjects = Array.from({length:requiredQuantity}, createObject);
+const createRequiredQuantityObjects = () => Array.from({length:requiredQuantityObjects}, createObject);
+
 
 createRequiredQuantityObjects();
