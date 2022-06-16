@@ -131,9 +131,9 @@ const createObject = () => ({
   location: getLocation(),
 });
 
-const requiredQuantityObjects = 10;
+const REQUIRED_OBJECTS = 10;
 
-const createRequiredQuantityObjects = () => Array.from({length:requiredQuantityObjects}, createObject);
+const createRequiredQuantityObjects = () => Array.from({length:REQUIRED_OBJECTS}, createObject);
 
 
 createRequiredQuantityObjects();
