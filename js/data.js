@@ -23,7 +23,7 @@ const getAuthor = () => ({
 const getOffer = () => ({
   // title: 'Лучшее предложение по Вашим критериям',
   adress: adressValue(),
-  // price: getPriceValue(),
+  price: getPriceValue(),
   type: getRandomArrayElement(TYPES),
   rooms: getRoomsValue(),
   guests: getGuestsValue(),
