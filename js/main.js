@@ -1,3 +1,5 @@
-import {createRequiredQuantityObjects} from 'data.js';
+import {createRequiredQuantityObjects} from './data.js';
+import './popup.js';
 
 createRequiredQuantityObjects();
+// newElement();
