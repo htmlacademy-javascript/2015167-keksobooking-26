@@ -41,7 +41,56 @@ cards.forEach((card) => {
       item.remove();
     }
   });
-  console.log(popupFeatures);
-  console.log(features);
+  cardTemplate.querySelector('.popup__description').textContent = card.offer.description;
+  const photosContainer = cardTemplate.querySelector('.popup__photos');
+  const photo = photosContainer.querySelector('.popup__photo');
+  photo.remove();
+  for (let i = 0; i < card.offer.photos.length; i++) {
+    const image = document.createElement('img');
+    image.classList.add('.popup__photo');
+    image.src = card.offer.photos[i];
+    image.width = 45;
+    image.height = 40;
+    image.alt = 'Фотография жилья';
+    photosContainer.appendChild(image);
+  }
+
+  const avatar = cardTemplate.querySelector('.popup__avatar');
+  avatar.src = card.author.avatar;
+
+  const validationData = [
+    card.offer.title,
+    card.offer.adress,
+    card.offer.price,
+    popupType,
+    card.offer.rooms,
+    card.offer.guests,
+    card.offer.checkin,
+    card.offer.checkout,
+    card.offer.features,
+    card.offer.description,
+    card.offer.photos,
+    card.author.avatar,
+  ];
+  const validationCard = [
+    cardTemplate.querySelector('.popup__title'),
+    cardTemplate.querySelector('.popup__text--address'),
+    cardTemplate.querySelector('.popup__text--price'),
+    cardTemplate.querySelector('.popup__type'),
+    cardTemplate.querySelector('.popup__text--capacity'),
+    cardTemplate.querySelector('.popup__text--capacity'),
+    cardTemplate.querySelector('.popup__text--time'),
+    cardTemplate.querySelector('.popup__text--time'),
+    popupFeatures,
+    cardTemplate.querySelector('.popup__description'),
+    photosContainer,
+    avatar,
+  ];
+  for (let i = 0; i < validationData.length; i++) {
+    if (!validationData[i]) {
+      validationCard[i].remove();
+    }
+  }
+
   similarCardPlace.appendChild(cardTemplate);
 });
