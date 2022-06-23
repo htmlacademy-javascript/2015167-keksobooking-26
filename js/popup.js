@@ -6,8 +6,7 @@ const similarTemplate = document.querySelector('#card')
   .querySelector('.popup');
 
 const cards = createRequiredQuantityObjects();
-const popupFeatures = similarTemplate.querySelector('.popup__features');
-const popupFeature = popupFeatures.querySelectorAll('.popup__feature');
+
 
 cards.forEach((card) => {
   const cardTemplate = similarTemplate.cloneNode(true);
@@ -31,6 +30,9 @@ cards.forEach((card) => {
   cardTemplate.querySelector('.popup__text--capacity').textContent = `${card.offer.rooms} комнаты для ${card.offer.guests} гостей`;
   cardTemplate.querySelector('.popup__text--time').textContent = `Заезд после ${card.offer.checkin}, выезд до ${card.offer.checkout}`;
   const features = card.offer.features;
+  const popupFeatures = cardTemplate.querySelector('.popup__features');
+  const popupFeature = popupFeatures.querySelectorAll('.popup__feature');
+
   popupFeature.forEach((item) => {
     const isNecessary = features.some(
       (feature) => item.classList.contains(`popup__feature--${feature}`)
@@ -39,9 +41,7 @@ cards.forEach((card) => {
       item.remove();
     }
   });
-  // cardTemplate.querySelector('.popup__features').remove();
-  // similarCardPlace.appendChild(popupFeatures);
-  // popupFeatures.insertAdjacentHTML('afterbegin','');
+  console.log(popupFeatures);
+  console.log(features);
   similarCardPlace.appendChild(cardTemplate);
 });
-console.log(popupFeatures)
