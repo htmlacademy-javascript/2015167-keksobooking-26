@@ -51,7 +51,6 @@ const createArray = () => {
 };
 
 const newPhotoArrayLength = () => getRandomInt(0, PHOTOS.length - 1);
-
 const createPhotoArray = () => {
   const newPhotoArray = [];
   const uniquePhotoArray = [];
