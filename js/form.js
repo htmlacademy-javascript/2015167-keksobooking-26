@@ -60,29 +60,18 @@ const roomNumber = formPublic.querySelector('#room_number');
 const guestNumber = formPublic.querySelector('#capacity');
 
 pristine.addValidator(roomNumber, () => {
-  if (roomNumber.value === '1' && guestNumber.value === '1'){
-    return true;
-  }
-  if (roomNumber.value === '2' && guestNumber.value === '2'){
-    return true;
-  }
-  if (roomNumber.value === '2' && guestNumber.value === '1'){
-    return true;
-  }
-  if (roomNumber.value === '3' && guestNumber.value === '1' ){
-    return true;
-  }
-  if (roomNumber.value === '3' && guestNumber.value === '2' ){
-    return true;
-  }
-  if (roomNumber.value === '3' && guestNumber.value === '3' ){
-    return true;
-  }
-  if (roomNumber.value === '100' && guestNumber.value === '0' ){
+  if (roomNumber.value >=guestNumber.value){
     return true;
   }
   return false;
-}, 'Измените количество комнат', 4, false);
+}, 'Измените количество комнат', 1, false);
+
+pristine.addValidator(guestNumber, () => {
+  if (guestNumber.value === '0'){
+    return roomNumber.value === guestNumber.value;
+  }
+  return true;
+}, 'Не для гостей только 100 комнат', 1, false);
 
 
 formPublic.addEventListener('submit', (evt)=>{
