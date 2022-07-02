@@ -61,18 +61,12 @@ const guestNumber = formPublic.querySelector('#capacity');
 
 pristine.addValidator(roomNumber, () => {
   if (roomNumber.value >=guestNumber.value){
+    if (guestNumber.value === '0'){
+      return roomNumber.value === guestNumber.value;}
     return true;
   }
   return false;
 }, 'Измените количество комнат', 1, false);
-
-pristine.addValidator(guestNumber, () => {
-  if (guestNumber.value === '0'){
-    return roomNumber.value === guestNumber.value;
-  }
-  return true;
-}, 'Не для гостей только 100 комнат', 1, false);
-
 
 formPublic.addEventListener('submit', (evt)=>{
   const isValid = pristine.validate();
