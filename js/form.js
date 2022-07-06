@@ -82,3 +82,34 @@ formPublic.addEventListener('submit', (evt)=>{
     onButtonSubmit.disabled = true;
   }
 });
+
+
+const selectType = formPublic.querySelector('.type');
+const selectTypeInput = formPublic.querySelector('.ad-form__value-price');
+
+const ruleSelectType = {
+  bungalow: '0',
+  flat: '1000',
+  hotel: '3000',
+  house: '5000',
+  palace: '10000'
+};
+
+const validateTypeInput = () => +ruleSelectType[selectType.value] <= +selectTypeInput.value;
+
+const validateTypeInputMessage = () => `Минимальная цена ${ruleSelectType[selectType.value]} руб`;
+pristine.addValidator(selectTypeInput, validateTypeInput, validateTypeInputMessage);
+
+selectType.addEventListener('change', ()=> {
+  selectTypeInput.placeholder = ruleSelectType[selectType.value];
+});
+
+const selectTimeIn = formPublic.querySelector('.timein');
+const selectTimeOut = formPublic.querySelector('.timeout');
+selectTimeIn.addEventListener('change', () => {
+  selectTimeOut.value = selectTimeIn.value;
+});
+
+selectTimeOut.addEventListener('change', () => {
+  selectTimeIn.value = selectTimeOut.value;
+});
