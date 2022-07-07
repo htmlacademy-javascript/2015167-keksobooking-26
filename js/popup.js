@@ -1,14 +1,14 @@
 import {createRequiredQuantityObjects} from './data.js';
+import { doFormsEnabled } from './form.js';
 
-const similarCardPlace = document.querySelector('#map-canvas');
+// const similarCardPlace = document.querySelector('#map-canvas');
 const similarTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
 const cards = createRequiredQuantityObjects();
 
-
-cards.forEach((card) => {
+const createCustomPopup = (card) => {
   const cardTemplate = similarTemplate.cloneNode(true);
   cardTemplate.querySelector('.popup__title').textContent = card.offer.title;
   cardTemplate.querySelector('.popup__text--address').textContent = card.offer.adress;
@@ -91,6 +91,91 @@ cards.forEach((card) => {
       validationCard[i].remove();
     }
   }
+  return cardTemplate;
+};
 
-  similarCardPlace.appendChild(cardTemplate);
+const map = L.map('map')
+  .on('load', () => {
+    doFormsEnabled();
+  })
+  .setView({
+    lat: 35.6895,
+    lng: 139.692,
+  }, 12);
+
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  },
+).addTo(map);
+
+const mainPinIcon = L.icon({
+  iconUrl: './img/main-pin.svg',
+  iconSize: [52, 52],
+  iconAnchor: [26, 52],
+});
+
+const mainPinMarker = L.marker(
+  {
+    lat: 35.6895,
+    lng: 139.692,
+  },
+  {
+    draggable: true,
+    icon: mainPinIcon,
+  },
+);
+
+
+const icon = L.icon({
+  iconUrl: './img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
+
+mainPinMarker.addTo(map);
+
+const onButtonReset = document.querySelector('.ad-form__reset');
+
+onButtonReset.addEventListener('click', () => {
+  mainPinMarker.setLatLng({
+    lat: 35.6895,
+    lng: 139.692,
+  });
+
+  map.setView({
+    lat: 35.6895,
+    lng: 139.692,
+  }, 12);
+});
+
+const markerGroup = L.layerGroup().addTo(map);
+
+const createMarker = (card) => {
+  const {lat, lng} = card.location;
+  const marker = L.marker(
+    {
+      lat,
+      lng,
+    },
+    {
+      icon,
+    },
+  );
+
+  marker
+    .addTo(markerGroup)
+    .bindPopup(createCustomPopup(card));
+};
+
+cards.forEach((card) => {
+  createMarker(card);
+});
+
+const inputAdress = document.querySelector('#address');
+inputAdress.value = '35.6895 139.692';
+mainPinMarker.on('moveend', (evt) => {
+  const address = evt.target.getLatLng();
+  inputAdress.value = `${+address.lat.toFixed(5)} ${+address.lng.toFixed(5)}`;
 });
