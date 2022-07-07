@@ -179,3 +179,5 @@ mainPinMarker.on('moveend', (evt) => {
   const address = evt.target.getLatLng();
   inputAdress.value = `${+address.lat.toFixed(5)} ${+address.lng.toFixed(5)}`;
 });
+
+export {onButtonReset};
