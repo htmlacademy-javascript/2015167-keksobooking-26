@@ -14,18 +14,34 @@ const createCustomPopup = (card) => {
   cardTemplate.querySelector('.popup__text--address').textContent = card.offer.adress;
   cardTemplate.querySelector('.popup__text--price').textContent = `${card.offer.price} ₽/ночь`;
   let popupType = 'Квартира';
-  if (card.offer.type === 'bungalow') {
-    popupType = 'Бунгало';
+  switch (card.offer.type ) {
+    case 'bungalow':
+      popupType = 'Бунгало';
+      break;
+    case 'house':
+      popupType = 'Дом';
+      break;
+    case 'palace':
+      popupType = 'Дворец';
+      break;
+    case 'hotel':
+      popupType = 'Отель';
+      break;
+    default:
+      popupType = 'Квартира';
   }
-  if (card.offer.type === 'house') {
-    popupType = 'Дом';
-  }
-  if (card.offer.type === 'palace') {
-    popupType = 'Дворец';
-  }
-  if (card.offer.type === 'hotel') {
-    popupType = 'Отель';
-  }
+  // if (card.offer.type === 'bungalow') {
+  //   popupType = 'Бунгало';
+  // }
+  // if (card.offer.type === 'house') {
+  //   popupType = 'Дом';
+  // }
+  // if (card.offer.type === 'palace') {
+  //   popupType = 'Дворец';
+  // }
+  // if (card.offer.type === 'hotel') {
+  //   popupType = 'Отель';
+  // }
   cardTemplate.querySelector('.popup__type').textContent = popupType;
   cardTemplate.querySelector('.popup__text--capacity').textContent = `${card.offer.rooms} комнаты для ${card.offer.guests} гостей`;
   cardTemplate.querySelector('.popup__text--time').textContent = `Заезд после ${card.offer.checkin}, выезд до ${card.offer.checkout}`;
