@@ -48,7 +48,6 @@ const doFormsEnabled = () =>{
   doFormFindEnabled();
 };
 
-doFormsEnabled();
 
 const onButtonSubmit = formPublic.querySelector('.ad-form__submit');
 const pristine = new Pristine(formPublic, {
@@ -113,3 +112,5 @@ selectTimeIn.addEventListener('change', () => {
 selectTimeOut.addEventListener('change', () => {
   selectTimeIn.value = selectTimeOut.value;
 });
+
+export {doFormsEnabled};
