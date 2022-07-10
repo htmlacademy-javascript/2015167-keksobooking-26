@@ -1,19 +1,15 @@
-import {createRequiredQuantityObjects} from './data.js';
 import { doFormsEnabled } from './form.js';
 
-// const similarCardPlace = document.querySelector('#map-canvas');
 const similarTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
-
-const cards = createRequiredQuantityObjects();
 
 const createCustomPopup = (card) => {
   const cardTemplate = similarTemplate.cloneNode(true);
   cardTemplate.querySelector('.popup__title').textContent = card.offer.title;
   cardTemplate.querySelector('.popup__text--address').textContent = card.offer.adress;
   cardTemplate.querySelector('.popup__text--price').textContent = `${card.offer.price} ₽/ночь`;
-  let popupType = 'Квартира';
+  let popupType;
   switch (card.offer.type ) {
     case 'bungalow':
       popupType = 'Бунгало';
@@ -30,46 +26,43 @@ const createCustomPopup = (card) => {
     default:
       popupType = 'Квартира';
   }
-  // if (card.offer.type === 'bungalow') {
-  //   popupType = 'Бунгало';
-  // }
-  // if (card.offer.type === 'house') {
-  //   popupType = 'Дом';
-  // }
-  // if (card.offer.type === 'palace') {
-  //   popupType = 'Дворец';
-  // }
-  // if (card.offer.type === 'hotel') {
-  //   popupType = 'Отель';
-  // }
+
   cardTemplate.querySelector('.popup__type').textContent = popupType;
   cardTemplate.querySelector('.popup__text--capacity').textContent = `${card.offer.rooms} комнаты для ${card.offer.guests} гостей`;
   cardTemplate.querySelector('.popup__text--time').textContent = `Заезд после ${card.offer.checkin}, выезд до ${card.offer.checkout}`;
   const features = card.offer.features;
   const popupFeatures = cardTemplate.querySelector('.popup__features');
   const popupFeature = popupFeatures.querySelectorAll('.popup__feature');
+  if (!features) {
+    popupFeatures.remove();
+  } else {
+    popupFeature.forEach((item) => {
+      const isNecessary = features.some(
+        (feature) => item.classList.contains(`popup__feature--${feature}`)
+      );
+      if (!isNecessary) {
+        item.remove();
+      }
+    });
+  }
 
-  popupFeature.forEach((item) => {
-    const isNecessary = features.some(
-      (feature) => item.classList.contains(`popup__feature--${feature}`)
-    );
-    if (!isNecessary) {
-      item.remove();
-    }
-  });
   cardTemplate.querySelector('.popup__description').textContent = card.offer.description;
   const photosContainer = cardTemplate.querySelector('.popup__photos');
   const photo = photosContainer.querySelector('.popup__photo');
-  photo.remove();
-  for (let i = 0; i < card.offer.photos.length; i++) {
-    const image = document.createElement('img');
-    image.classList.add('.popup__photo');
-    image.src = card.offer.photos[i];
-    image.width = 45;
-    image.height = 40;
-    image.alt = 'Фотография жилья';
-    photosContainer.appendChild(image);
-  }
+  const images = card.offer.photos;
+  if (!images) {
+    photo.remove();
+  } else {
+    photo.remove();
+    for (let i = 0; i < card.offer.photos.length; i++) {
+      const image = document.createElement('img');
+      image.classList.add('.popup__photo');
+      image.src = card.offer.photos[i];
+      image.width = 45;
+      image.height = 40;
+      image.alt = 'Фотография жилья';
+      photosContainer.appendChild(image);
+    }}
 
   const avatar = cardTemplate.querySelector('.popup__avatar');
   avatar.src = card.author.avatar;
@@ -185,9 +178,11 @@ const createMarker = (card) => {
     .bindPopup(createCustomPopup(card));
 };
 
-cards.forEach((card) => {
-  createMarker(card);
-});
+const renderCards = (cards) => {
+  cards.forEach((card) => {
+    createMarker(card);
+  });
+};
 
 const inputAdress = document.querySelector('#address');
 inputAdress.value = '35.6895 139.692';
@@ -196,4 +191,4 @@ mainPinMarker.on('moveend', (evt) => {
   inputAdress.value = `${+address.lat.toFixed(5)} ${+address.lng.toFixed(5)}`;
 });
 
-export {onButtonReset};
+export {onButtonReset, renderCards};

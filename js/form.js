@@ -1,3 +1,5 @@
+import { sendData } from './api.js';
+import { errorMessage, successMessage} from './util.js';
 const formPublic = document.querySelector ('.ad-form');
 const formFind = document.querySelector ('.map__filters');
 
@@ -74,11 +76,14 @@ pristine.addValidator(guestNumber, () => {
 
 
 formPublic.addEventListener('submit', (evt)=>{
+  const formData = new FormData(evt.target);
+  evt.preventDefault();
   const isValid = pristine.validate();
-  if (!isValid) {
-    evt.preventDefault();
-  } else {
+  if (isValid) {
     onButtonSubmit.disabled = true;
+    sendData(formData);
+  } else {
+    errorMessage();
   }
 });
 
