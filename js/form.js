@@ -1,5 +1,5 @@
 import { sendData } from './api.js';
-import { errorMessage, successMessage} from './util.js';
+import { errorMessage} from './util.js';
 const formPublic = document.querySelector ('.ad-form');
 const formFind = document.querySelector ('.map__filters');
 
