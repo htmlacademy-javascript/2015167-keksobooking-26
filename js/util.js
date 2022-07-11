@@ -63,9 +63,4 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-// const buttonReset = document.querySelector('.ad-form__reset');
-// const form = document.querySelector('.ad-form');
-// buttonReset.addEventListener('click', () => {
-//   form.reset();
-// });
 export {errorMessage, successMessage, showAlert};

@@ -82,6 +82,7 @@ formPublic.addEventListener('submit', (evt)=>{
   if (isValid) {
     onButtonSubmit.disabled = true;
     sendData(formData);
+    formPublic.reset();
   } else {
     errorMessage();
   }

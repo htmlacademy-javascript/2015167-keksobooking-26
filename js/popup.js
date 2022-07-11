@@ -188,7 +188,7 @@ const inputAdress = document.querySelector('#address');
 inputAdress.value = '35.6895 139.692';
 mainPinMarker.on('moveend', (evt) => {
   const address = evt.target.getLatLng();
-  inputAdress.value = `${+address.lat.toFixed(5)} ${+address.lng.toFixed(5)}`;
+  inputAdress.value = `${address.lat.toFixed(5)} ${address.lng.toFixed(5)}`;
 });
 
 export {onButtonReset, renderCards};
