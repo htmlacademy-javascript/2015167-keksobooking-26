@@ -1,6 +1,7 @@
-import {createRequiredQuantityObjects} from './data.js';
 import './popup.js';
 import './form.js';
 import './slider.js';
+import {getData} from './api.js';
 
-createRequiredQuantityObjects();
+getData();
+
