@@ -26,8 +26,6 @@ const doFormsDisabled = () =>{
   doFormFindDisabled();
 };
 
-doFormsDisabled();
-
 
 const doFormPublicEnabled = () => {
   formPublic.classList.remove('ad-form--disabled');
@@ -119,4 +117,4 @@ selectTimeOut.addEventListener('change', () => {
   selectTimeIn.value = selectTimeOut.value;
 });
 
-export {doFormsEnabled};
+export {doFormsEnabled, doFormsDisabled};
