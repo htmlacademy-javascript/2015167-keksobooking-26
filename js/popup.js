@@ -178,79 +178,14 @@ const createMarker = (card) => {
     .bindPopup(createCustomPopup(card));
 };
 
-const formFilters = document.querySelector('.map__filters');
-const filterType = formFilters.querySelector('.map__filter--type');
-const filterPrice = formFilters.querySelector('.map__filter--price');
-const filterRooms = formFilters.querySelector('.map__filter--rooms');
-const filterGuests = formFilters.querySelector('.map__filter--guests');
-const filterWifi = formFilters.querySelector('.map__checkbox--wifi');
-const filterDishwasher = formFilters.querySelector('.map__checkbox--dishwasher');
-const filterParking = formFilters.querySelector('.map__checkbox--parking');
-const filterWasher = formFilters.querySelector('.map__checkbox--washer');
-const filterElevator = formFilters.querySelector('.map__checkbox--elevator');
-const filterConditioner = formFilters.querySelector('.map__checkbox--conditioner');
-
-const filterCards = (cards) => {
-  formFilters.addEventListener('change', () => {
-    const newList = cards.slice();
-    newList.filter((card) => {
-      if (filterType.value === card.offer.type) {
-        return true;
-      }
-      const min = 10000;
-      const max = 50000;
-      if (filterPrice.value === 'middle') {
-        if (card.offer.price > min && card.offer.price < max) {
-          return true;
-        }
-      }
-      if (filterPrice.value === 'low') {
-        if (card.offer.price < min) {
-          return true;
-        }
-      }
-      if (filterPrice.value === 'high') {
-        if (card.offer.price > max) {
-          return true;
-        }
-      }
-      if (card.offer.rooms === +filterRooms.value || filterRooms.value === 'any') {
-        return true;
-      }
-      if (card.offer.features) {
-        if (filterWifi.checked) {
-          return card.offer.features.includes(filterWifi.value);
-        }
-        if (filterDishwasher.checked) {
-          return card.offer.features.includes(filterDishwasher.value);
-        }
-        if (filterParking.checked) {
-          return card.offer.features.includes(filterParking.value);
-        }
-        if (filterWasher.checked) {
-          return card.offer.features.includes(filterWasher.value);
-        }
-        if (filterElevator.checked) {
-          return card.offer.features.includes(filterElevator.value);
-        }
-        if (filterConditioner.checked) {
-          return card.offer.features.includes(filterWifi.value);
-        }
-      }
-      if (filterGuests.value === 'any') {
-        return true;
-      } else if (filterGuests.value === card.offer.guests) {
-        return true;
-      }
-    });
-    console.log(newList);
-  });
-}
 
 const renderCards = (cards) => {
-  cards.forEach((card) => {
-    createMarker(card);
-  });
+  const qualityCards = 10;
+  cards
+    .slice(0, qualityCards)
+    .forEach((card) => {
+      createMarker(card);
+    });
 };
 
 const inputAdress = document.querySelector('#address');
@@ -260,4 +195,4 @@ mainPinMarker.on('moveend', (evt) => {
   inputAdress.value = `${address.lat.toFixed(5)} ${address.lng.toFixed(5)}`;
 });
 
-export {onButtonReset, renderCards, filterCards};
+export {onButtonReset, renderCards};
