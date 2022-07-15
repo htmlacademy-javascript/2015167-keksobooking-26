@@ -18,12 +18,16 @@ const filterConditioner = formFilters.querySelector('.map__checkbox--conditioner
 
 formFilters.addEventListener('change', () => {
   getData();
+  // console.log(evt.target.value)
+  // console.log(card.offer.features)
+  // console.log(filterWifi.value)
 });
 
 const setType = (card) => {
-  if (filterType.value === card.offer.type || filterType.value === 'any') {
+  if (filterType.value === 'any' || filterType.value === card.offer.type) {
     return true;
   }
+  return false;
 };
 const setPrice = (card) => {
   const min = 10000;
@@ -46,85 +50,86 @@ const setPrice = (card) => {
       return true;
     }
   }
-
+  return false;
 };
 const setRooms = (card) => {
   if (card.offer.rooms === +filterRooms.value || filterRooms.value === 'any') {
     return true;
   }
-
+  return false;
 };
 const setGuests = (card) => {
   if (filterGuests.value === 'any') {
     return true;
-  } else if (filterGuests.value === card.offer.guests) {
+  }
+  if (+filterGuests.value === card.offer.guests) {
     return true;
   }
-
+  return false;
 };
 const setWifi = (card) => {
+  const value = filterWifi.value;
+  // console.log(value)
   if (!filterWifi.checked) {
     return true;
-  } else {
-    return card.offer.features.includes(filterWifi.value);
   }
-
+  if (card.offer.features.includes(`${value}`)) {
+    return true;
+  }
+  return false;
 };
 const setDishwasher = (card) => {
   if (!filterDishwasher.checked) {
     return true;
-  } else {
-    return card.offer.features.includes(filterDishwasher.value);
   }
+  if (!card.offer.features) {
+    return false
+  }
+  return card.offer.features.includes(filterDishwasher.value);
 };
 const setParking = (card) => {
   if (!filterParking.checked) {
     return true;
-  } else {
-    return card.offer.features.includes(filterParking.value);
   }
-
+  if (card.offer.features.includes(filterParking.value)) {
+    return true;
+  }
+  return false;
 };
 const setWasher = (card) => {
   if (!filterWasher.checked) {
     return true;
-  } else {
-    return card.offer.features.includes(filterWasher.value);
   }
+  if (card.offer.features.includes(filterWasher.value)) {
+    return true;
+  }
+  return false;
 };
 const setElevator = (card) => {
   if (!filterElevator.checked) {
     return true;
-  } else {
-    return card.offer.features.includes(filterElevator.value);
   }
-
+  if (card.offer.features.includes(filterElevator.value)) {
+    return true;
+  }
+  return false
 };
 const setConditioner = (card) => {
   if (!filterWifi.checked) {
     return true;
-  } else {
-    return card.offer.features.includes(filterConditioner.value);
   }
-};
-
-const filterTrue = (card) => {
-  if (setType(card) && setPrice(card) && setRooms(card) && setGuests(card) && setWifi(card) && setDishwasher(card) && setParking(card) && setWasher(card) && setElevator(card) && setConditioner(card)) {
+  if (card.offer.features.includes(filterConditioner.value)) {
     return true;
   }
+  return false;
 };
 
+
 const getCards = (cards) => {
-  const filterData = cards.slice();
-  const renderData = [];
-  filterData.forEach((item) => {
-    console.log(filterTrue(item));
-    if(filterTrue(item)) {
-      renderData.push(item);
-    }
-  }
-  );
-  renderCards(renderData);
-};
+  cards.filter((card) => {setDishwasher(card)
+  console.log(setDishwasher(card))
+})
+  // renderCards(cards);
+}
 
 export {getCards};
