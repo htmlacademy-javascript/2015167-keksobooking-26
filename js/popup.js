@@ -181,6 +181,8 @@ const createMarker = (card) => {
 
 const renderCards = (cards) => {
   const qualityCards = 10;
+  markerGroup.clearLayers();
+
   cards
     .slice(0, qualityCards)
     .forEach((card) => {

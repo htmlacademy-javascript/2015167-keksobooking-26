@@ -1,15 +1,12 @@
 import { doFormsDisabled, doFormsEnabled } from './form.js';
 // import { renderCards } from './popup.js';
 import {errorMessage, successMessage, showAlert, } from './util.js';
-import {getCards} from './filter.js';
-const getData = () => {
+// import {getCards} from './filter.js';
+const getData = (onSuccess) => {
   doFormsDisabled();
   fetch ('https://26.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
-    .then((cards) => {getCards(cards);})
-    // .then((cards) => {
-    //   renderCards(cards);
-    // })
+    .then((cards) => onSuccess(cards))
     .then(() => {
       doFormsEnabled();
     })
