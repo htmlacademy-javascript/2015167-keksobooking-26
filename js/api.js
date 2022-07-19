@@ -1,15 +1,19 @@
-import {renderCards} from './popup.js';
-import {errorMessage, successMessage, showAlert} from './util.js';
-const qualityCards = 25;
-const getData = () => {
+import { doFormsDisabled, doFormsEnabled } from './form.js';
+// import { renderCards } from './popup.js';
+import {errorMessage, successMessage, showAlert, } from './util.js';
+// import {getCards} from './filter.js';
+const getData = (onSuccess) => {
+  doFormsDisabled();
   fetch ('https://26.javascript.pages.academy/keksobooking/data')
     .then((response) => response.json())
-    .then((cards) => {
-      renderCards(cards.slice(0, qualityCards));
+    .then((cards) => onSuccess(cards))
+    .then(() => {
+      doFormsEnabled();
     })
     .catch(() => {
       showAlert('Не удалось получить данные с сервера');
-    });
+    }
+    );
 };
 
 const sendData = (formData) => {

@@ -62,5 +62,12 @@ const showAlert = (message) => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
 };
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
 
-export {errorMessage, successMessage, showAlert};
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+export {errorMessage, successMessage, showAlert, debounce};
