@@ -1,4 +1,5 @@
 import './popup.js';
+import './photo.js';
 import './form.js';
 import './slider.js';
 import {getData} from './api.js';
