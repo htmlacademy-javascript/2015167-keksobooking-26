@@ -35,7 +35,3 @@ inputPrice.addEventListener('input', () => {
 onButtonReset.addEventListener('click', () => {
   sliderElement.noUiSlider.set(1000);
 });
-
-// Можно удалить или заблокировать
-// sliderElement.setAttribute('disabled', true);
-// sliderElement.noUiSlider.destroy();

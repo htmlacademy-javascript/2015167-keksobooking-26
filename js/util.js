@@ -1,14 +1,14 @@
 const ALERT_SHOW_TIME = 5000;
-
-const success = document.querySelector('.success-template')
-  .content
-  .querySelector('.success');
+const body = document.querySelector('.body');
 const error = document.querySelector('.error-template')
   .content
   .querySelector('.error');
-const body = document.querySelector('.body');
-const isEscapeKey = (evt) => evt.key === 'Escape';
 const buttonError = error.querySelector('.error__button');
+const success = document.querySelector('.success-template')
+  .content
+  .querySelector('.success');
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
 const errorMessage = () => {
   const newError = error.cloneNode(true);
   body.appendChild(newError);
@@ -53,15 +53,14 @@ const showAlert = (message) => {
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'red';
-
   alertContainer.textContent = message;
-
   document.body.append(alertContainer);
 
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
 };
+
 const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
 
@@ -70,4 +69,5 @@ const debounce = (callback, timeoutDelay = 500) => {
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
 };
+
 export {errorMessage, successMessage, showAlert, debounce};

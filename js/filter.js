@@ -8,25 +8,25 @@ const filterGuests = formFilters.querySelector('.map__filter--guests');
 const getType = (card) => filterType.value === 'any' || filterType.value === card.offer.type;
 
 const getPrice = (card) => {
-  const min = 10000;
-  const max = 50000;
+  const MIN = 10000;
+  const MAX = 50000;
   if (filterPrice.value === 'any') {
     return true;
   }
   if (filterPrice.value === 'middle') {
-    if (card.offer.price > min && card.offer.price < max) {
+    if (card.offer.price > MIN && card.offer.price < MAX) {
       return true;
     }
     return false;
   }
   if (filterPrice.value === 'low') {
-    if (card.offer.price < min) {
+    if (card.offer.price < MIN) {
       return true;
     }
     return false;
   }
   if (filterPrice.value === 'high') {
-    if (card.offer.price > max) {
+    if (card.offer.price > MAX) {
       return true;
     }
     return false;
