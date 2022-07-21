@@ -1,8 +1,15 @@
 import { sendData } from './api.js';
 import { errorMessage} from './util.js';
+
 const formPublic = document.querySelector ('.ad-form');
 const formFind = document.querySelector ('.map__filters');
-
+const onButtonSubmit = formPublic.querySelector('.ad-form__submit');
+const roomNumber = formPublic.querySelector('#room_number');
+const guestNumber = formPublic.querySelector('#capacity');
+const selectType = formPublic.querySelector('.type');
+const selectTypeInput = formPublic.querySelector('.ad-form__value-price');
+const selectTimeIn = formPublic.querySelector('.timein');
+const selectTimeOut = formPublic.querySelector('.timeout');
 
 const doFormPublicDisabled = () => {
   formPublic.classList.add('ad-form--disabled');
@@ -12,7 +19,6 @@ const doFormPublicDisabled = () => {
   }
 };
 
-
 const doFormFindDisabled = () => {
   formFind.classList.add('ad-form--disabled');
   for (let i = 0; i < formFind.childNodes.length; i++) {
@@ -20,12 +26,10 @@ const doFormFindDisabled = () => {
   }
 };
 
-
 const doFormsDisabled = () =>{
   doFormPublicDisabled();
   doFormFindDisabled();
 };
-
 
 const doFormPublicEnabled = () => {
   formPublic.classList.remove('ad-form--disabled');
@@ -34,7 +38,6 @@ const doFormPublicEnabled = () => {
   }
 };
 
-
 const doFormFindEnabled = () => {
   formFind.classList.remove('ad-form--disabled');
   for (let i = 0; i < formFind.childNodes.length; i++) {
@@ -42,21 +45,16 @@ const doFormFindEnabled = () => {
   }
 };
 
-
 const doFormsEnabled = () =>{
   doFormPublicEnabled();
   doFormFindEnabled();
 };
 
-
-const onButtonSubmit = formPublic.querySelector('.ad-form__submit');
 const pristine = new Pristine(formPublic, {
   classTo: 'ad-form__element',
   errorTextParent: 'ad-form__element',
   errorTextClass: 'ad-form__error-text'
 });
-const roomNumber = formPublic.querySelector('#room_number');
-const guestNumber = formPublic.querySelector('#capacity');
 
 pristine.addValidator(roomNumber, () => {
   if (roomNumber.value >=guestNumber.value){
@@ -86,10 +84,6 @@ formPublic.addEventListener('submit', (evt)=>{
   }
 });
 
-
-const selectType = formPublic.querySelector('.type');
-const selectTypeInput = formPublic.querySelector('.ad-form__value-price');
-
 const ruleSelectType = {
   bungalow: '0',
   flat: '1000',
@@ -107,8 +101,6 @@ selectType.addEventListener('change', ()=> {
   selectTypeInput.placeholder = ruleSelectType[selectType.value];
 });
 
-const selectTimeIn = formPublic.querySelector('.timein');
-const selectTimeOut = formPublic.querySelector('.timeout');
 selectTimeIn.addEventListener('change', () => {
   selectTimeOut.value = selectTimeIn.value;
 });

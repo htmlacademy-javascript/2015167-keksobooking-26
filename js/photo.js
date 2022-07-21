@@ -1,7 +1,8 @@
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-
 const fileChooserAvatar = document.querySelector('.ad-form-header__input');
 const previewAvatar = document.querySelector('.ad-form-header__image');
+const fileChooserPhoto = document.querySelector('.ad-form__input');
+const previewPhoto = document.querySelector('.ad-form__photo');
 
 fileChooserAvatar.addEventListener('change', () => {
   const file = fileChooserAvatar.files[0];
@@ -14,9 +15,6 @@ fileChooserAvatar.addEventListener('change', () => {
   }
 });
 
-
-const fileChooserPhoto = document.querySelector('.ad-form__input');
-const previewPhoto = document.querySelector('.ad-form__photo');
 
 fileChooserPhoto.addEventListener('change', () => {
   const file = fileChooserPhoto.files[0];

@@ -1,7 +1,6 @@
 import { doFormsDisabled, doFormsEnabled } from './form.js';
-// import { renderCards } from './popup.js';
 import {errorMessage, successMessage, showAlert, } from './util.js';
-// import {getCards} from './filter.js';
+
 const getData = (onSuccess) => {
   doFormsDisabled();
   fetch ('https://26.javascript.pages.academy/keksobooking/data')

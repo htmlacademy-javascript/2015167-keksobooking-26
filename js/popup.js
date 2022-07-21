@@ -1,5 +1,7 @@
 import { doFormsEnabled } from './form.js';
 
+const onButtonReset = document.querySelector('.ad-form__reset');
+const inputAdress = document.querySelector('#address');
 const similarTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
@@ -136,7 +138,6 @@ const mainPinMarker = L.marker(
   },
 );
 
-
 const icon = L.icon({
   iconUrl: './img/pin.svg',
   iconSize: [40, 40],
@@ -144,8 +145,6 @@ const icon = L.icon({
 });
 
 mainPinMarker.addTo(map);
-
-const onButtonReset = document.querySelector('.ad-form__reset');
 
 onButtonReset.addEventListener('click', () => {
   mainPinMarker.setLatLng({
@@ -178,7 +177,6 @@ const createMarker = (card) => {
     .bindPopup(createCustomPopup(card));
 };
 
-
 const renderCards = (cards) => {
   const qualityCards = 10;
   markerGroup.clearLayers();
@@ -190,7 +188,6 @@ const renderCards = (cards) => {
     });
 };
 
-const inputAdress = document.querySelector('#address');
 inputAdress.value = '35.6895 139.692';
 mainPinMarker.on('moveend', (evt) => {
   const address = evt.target.getLatLng();
