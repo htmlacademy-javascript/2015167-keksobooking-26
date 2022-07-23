@@ -1,4 +1,3 @@
-
 const formFilters = document.querySelector('.map__filters');
 const filterType = formFilters.querySelector('.map__filter--type');
 const filterPrice = formFilters.querySelector('.map__filter--price');
@@ -6,7 +5,6 @@ const filterRooms = formFilters.querySelector('.map__filter--rooms');
 const filterGuests = formFilters.querySelector('.map__filter--guests');
 
 const getType = (card) => filterType.value === 'any' || filterType.value === card.offer.type;
-
 const getPrice = (card) => {
   const MIN = 10000;
   const MAX = 50000;
@@ -34,9 +32,7 @@ const getPrice = (card) => {
 };
 
 const getRooms = (card) => card.offer.rooms === +filterRooms.value || filterRooms.value === 'any';
-
 const getGuests = (card) => filterGuests.value === 'any' || +filterGuests.value === card.offer.guests;
-
 const getFeatures = (card) => {
   const checkedsInputs = Array.from(formFilters.querySelectorAll('input[type="checkbox"]:checked'));
 

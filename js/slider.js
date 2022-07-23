@@ -1,4 +1,5 @@
 import { onButtonReset } from './popup.js';
+
 const sliderElement = document.querySelector('.ad-form__slider');
 const inputPrice = document.querySelector('.ad-form__value-price');
 

@@ -36,5 +36,3 @@ const sendData = (formData) => {
 };
 
 export {getData, sendData};
-
-
