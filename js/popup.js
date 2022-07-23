@@ -68,7 +68,6 @@ const createCustomPopup = (card) => {
 
   const avatar = cardTemplate.querySelector('.popup__avatar');
   avatar.src = card.author.avatar;
-
   const validationData = [
     card.offer.title,
     card.offer.adress,
@@ -159,7 +158,6 @@ onButtonReset.addEventListener('click', () => {
 });
 
 const markerGroup = L.layerGroup().addTo(map);
-
 const createMarker = (card) => {
   const {lat, lng} = card.location;
   const marker = L.marker(

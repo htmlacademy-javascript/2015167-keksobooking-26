@@ -13,4 +13,3 @@ getData((cards) => {
   renderCards(cards);
   setTypeClick(cards, debounce(renderCards, RENDER_DELAY));
 });
-

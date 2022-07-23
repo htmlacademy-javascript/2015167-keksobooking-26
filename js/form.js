@@ -93,7 +93,6 @@ const ruleSelectType = {
 };
 
 const validateTypeInput = () => +ruleSelectType[selectType.value] <= +selectTypeInput.value;
-
 const validateTypeInputMessage = () => `Минимальная цена ${ruleSelectType[selectType.value]} руб`;
 pristine.addValidator(selectTypeInput, validateTypeInput, validateTypeInputMessage);
 

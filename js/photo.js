@@ -15,11 +15,9 @@ fileChooserAvatar.addEventListener('change', () => {
   }
 });
 
-
 fileChooserPhoto.addEventListener('change', () => {
   const file = fileChooserPhoto.files[0];
   const fileName = file.name.toLowerCase();
-
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
   if (matches) {

@@ -7,7 +7,6 @@ const buttonError = error.querySelector('.error__button');
 const success = document.querySelector('.success-template')
   .content
   .querySelector('.success');
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const errorMessage = () => {
   const newError = error.cloneNode(true);
