@@ -1,6 +1,6 @@
 import { doFormsEnabled } from './form.js';
 
-const onButtonReset = document.querySelector('.ad-form__reset');
+const buttonReset = document.querySelector('.ad-form__reset');
 const inputAdress = document.querySelector('#address');
 const similarTemplate = document.querySelector('#card')
   .content
@@ -82,7 +82,7 @@ const createCustomPopup = (card) => {
     card.offer.photos,
     card.author.avatar,
   ];
-  const validationCard = [
+  const validationCards = [
     cardTemplate.querySelector('.popup__title'),
     cardTemplate.querySelector('.popup__text--address'),
     cardTemplate.querySelector('.popup__text--price'),
@@ -98,7 +98,7 @@ const createCustomPopup = (card) => {
   ];
   for (let i = 0; i < validationData.length; i++) {
     if (!validationData[i]) {
-      validationCard[i].remove();
+      validationCards[i].remove();
     }
   }
   return cardTemplate;
@@ -145,18 +145,6 @@ const icon = L.icon({
 
 mainPinMarker.addTo(map);
 
-onButtonReset.addEventListener('click', () => {
-  mainPinMarker.setLatLng({
-    lat: 35.6895,
-    lng: 139.692,
-  });
-
-  map.setView({
-    lat: 35.6895,
-    lng: 139.692,
-  }, 12);
-});
-
 const markerGroup = L.layerGroup().addTo(map);
 const createMarker = (card) => {
   const {lat, lng} = card.location;
@@ -186,10 +174,35 @@ const renderCards = (cards) => {
     });
 };
 
+const resetPhotos = () => {
+  if (document.querySelector('.ad-form-header__image')) {
+    document.querySelector('.ad-form-header__image').src = 'img/muffin-grey.svg';
+  }
+  if (document.querySelector('.ad-form__photo-image')) {
+    document.querySelector('.ad-form__photo-image').remove();
+  }
+};
+
+const resetForms = (cards) => {
+  buttonReset.addEventListener('click', () => {
+    document.querySelector('.map__filters').reset();
+    renderCards(cards);
+    resetPhotos();
+    mainPinMarker.setLatLng({
+      lat: 35.6895,
+      lng: 139.692,
+    });
+    map.setView({
+      lat: 35.6895,
+      lng: 139.692,
+    }, 12);
+  });
+};
+
 inputAdress.value = '35.6895 139.692';
 mainPinMarker.on('moveend', (evt) => {
   const address = evt.target.getLatLng();
   inputAdress.value = `${address.lat.toFixed(5)} ${address.lng.toFixed(5)}`;
 });
 
-export {onButtonReset, renderCards};
+export {buttonReset, renderCards, resetForms, resetPhotos};

@@ -22,7 +22,7 @@ fileChooserPhoto.addEventListener('change', () => {
 
   if (matches) {
     const image = document.createElement('img');
-    image.classList.add('.ad-form__photo-image');
+    image.classList.add('ad-form__photo-image');
     image.src = URL.createObjectURL(file);
     image.alt = 'Изображение объявления.';
     image.width = '70';

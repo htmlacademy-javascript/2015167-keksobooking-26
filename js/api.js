@@ -1,5 +1,5 @@
 import { doFormsDisabled, doFormsEnabled } from './form.js';
-import {errorMessage, successMessage, showAlert, } from './util.js';
+import {showErrorMessage, showSuccessMessage, showAlert, } from './util.js';
 
 const getData = (onSuccess) => {
   doFormsDisabled();
@@ -25,13 +25,13 @@ const sendData = (formData) => {
   )
     .then((response) => {
       if (response.ok) {
-        successMessage();
+        showSuccessMessage();
       } else {
-        errorMessage();
+        showErrorMessage();
       }
     })
     .catch(() => {
-      errorMessage();
+      showErrorMessage();
     });
 };
 
