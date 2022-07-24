@@ -3,12 +3,14 @@ const body = document.querySelector('.body');
 const error = document.querySelector('.error-template')
   .content
   .querySelector('.error');
+
 const buttonError = error.querySelector('.error__button');
 const success = document.querySelector('.success-template')
   .content
   .querySelector('.success');
+
 const isEscapeKey = (evt) => evt.key === 'Escape';
-const errorMessage = () => {
+const showErrorMessage = () => {
   const newError = error.cloneNode(true);
   body.appendChild(newError);
   document.addEventListener('click', () => {
@@ -26,7 +28,7 @@ const errorMessage = () => {
   });
 };
 
-const successMessage = () => {
+const showSuccessMessage = () => {
   const newSuccess = success.cloneNode(true);
   body.appendChild(newSuccess);
   document.addEventListener('click', () => {
@@ -69,4 +71,4 @@ const debounce = (callback, timeoutDelay = 500) => {
   };
 };
 
-export {errorMessage, successMessage, showAlert, debounce};
+export {showErrorMessage, showSuccessMessage, showAlert, debounce};

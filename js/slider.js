@@ -1,4 +1,4 @@
-import { onButtonReset } from './popup.js';
+import { buttonReset } from './popup.js';
 
 const sliderElement = document.querySelector('.ad-form__slider');
 const inputPrice = document.querySelector('.ad-form__value-price');
@@ -33,6 +33,6 @@ inputPrice.addEventListener('input', () => {
   );
 });
 
-onButtonReset.addEventListener('click', () => {
+buttonReset.addEventListener('click', () => {
   sliderElement.noUiSlider.set(1000);
 });

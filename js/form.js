@@ -1,15 +1,24 @@
 import { sendData } from './api.js';
-import { errorMessage} from './util.js';
+import { resetPhotos } from './popup.js';
+import { showErrorMessage} from './util.js';
 
 const formPublic = document.querySelector ('.ad-form');
 const formFind = document.querySelector ('.map__filters');
-const onButtonSubmit = formPublic.querySelector('.ad-form__submit');
+const buttonSubmit = formPublic.querySelector('.ad-form__submit');
 const roomNumber = formPublic.querySelector('#room_number');
 const guestNumber = formPublic.querySelector('#capacity');
 const selectType = formPublic.querySelector('.type');
 const selectTypeInput = formPublic.querySelector('.ad-form__value-price');
 const selectTimeIn = formPublic.querySelector('.timein');
 const selectTimeOut = formPublic.querySelector('.timeout');
+const RuleSelectType = {
+  BUNGALOW: '0',
+  FLAT: '1000',
+  HOTEL: '3000',
+  HOUSE: '5000',
+  PALACE: '10000'
+};
+
 
 const doFormPublicDisabled = () => {
   formPublic.classList.add('ad-form--disabled');
@@ -76,28 +85,22 @@ formPublic.addEventListener('submit', (evt)=>{
   evt.preventDefault();
   const isValid = pristine.validate();
   if (isValid) {
-    onButtonSubmit.disabled = true;
+    buttonSubmit.disabled = true;
     sendData(formData);
     formPublic.reset();
+    resetPhotos();
   } else {
-    errorMessage();
+    showErrorMessage();
   }
 });
 
-const ruleSelectType = {
-  bungalow: '0',
-  flat: '1000',
-  hotel: '3000',
-  house: '5000',
-  palace: '10000'
-};
 
-const validateTypeInput = () => +ruleSelectType[selectType.value] <= +selectTypeInput.value;
-const validateTypeInputMessage = () => `Минимальная цена ${ruleSelectType[selectType.value]} руб`;
+const validateTypeInput = () => +RuleSelectType[selectType.value] <= +selectTypeInput.value;
+const validateTypeInputMessage = () => `Минимальная цена ${RuleSelectType[selectType.value]} руб`;
 pristine.addValidator(selectTypeInput, validateTypeInput, validateTypeInputMessage);
 
 selectType.addEventListener('change', ()=> {
-  selectTypeInput.placeholder = ruleSelectType[selectType.value];
+  selectTypeInput.placeholder = RuleSelectType[selectType.value];
 });
 
 selectTimeIn.addEventListener('change', () => {
