@@ -95,12 +95,12 @@ formPublic.addEventListener('submit', (evt)=>{
 });
 
 
-const validateTypeInput = () => +RuleSelectType[selectType.value] <= +selectTypeInput.value;
-const validateTypeInputMessage = () => `Минимальная цена ${RuleSelectType[selectType.value]} руб`;
+const validateTypeInput = () => +RuleSelectType[selectType.value.toUpperCase()] <= +selectTypeInput.value;
+const validateTypeInputMessage = () => `Минимальная цена ${RuleSelectType[selectType.value.toUpperCase()]} руб`;
 pristine.addValidator(selectTypeInput, validateTypeInput, validateTypeInputMessage);
 
 selectType.addEventListener('change', ()=> {
-  selectTypeInput.placeholder = RuleSelectType[selectType.value];
+  selectTypeInput.placeholder = RuleSelectType[selectType.value.toUpperCase()];
 });
 
 selectTimeIn.addEventListener('change', () => {
